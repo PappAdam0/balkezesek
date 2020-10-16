@@ -11,7 +11,6 @@ namespace balkezesek
     class Program
     {
         static List<Balkez> balkez = new List<Balkez>();
-        static Dictionary<string, int> utoljara = new Dictionary<string, int>();
         static int evszam = 0;
         static void Beolvas()
         {
@@ -32,13 +31,8 @@ namespace balkezesek
             {
                 if (i.Utolso.Contains("1999-10"))
                 {
-                    utoljara.Add(i.Nev, i.Magassag);
+                    Console.WriteLine($"\t{i.Nev}, {Math.Round(i.Magassag * 2.54, 1):N1} cm");
                 }
-            }
-
-            foreach (var i in utoljara)
-            {
-                Console.WriteLine($"\t{i.Key}, {Math.Round(i.Value*2.54,1)}");
             }
         }
 
@@ -63,13 +57,20 @@ namespace balkezesek
 
         static void Hatodik()
         {
+            double suly = 0;
+            double db = 0;
+            double atlag = 0;
             foreach (var i in balkez)
             {
-                if (evszam => i.Elso)
+                if (evszam >= int.Parse(i.Elso.Substring(0,4)) && evszam <= int.Parse(i.Utolso.Substring(0, 4)))
                 {
-
+                    suly = suly + i.Suly;
+                    db++;
                 }
             }
+            atlag = suly / db;
+            
+            Console.WriteLine($"6. Feladat: {atlag:N2}");
         }
         static void Main(string[] args)
         {
