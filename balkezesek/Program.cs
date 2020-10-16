@@ -49,7 +49,7 @@ namespace balkezesek
                 }
                 else
                 {
-                    Console.Write("Hibás adat! Kérek egy 1990 és 1999 közötti évszámot: ");
+                    Console.Write("Hibás adat! Kérek egy 1990 és 1999 közötti évszámot!: ");
 
                 }
             }
@@ -70,7 +70,29 @@ namespace balkezesek
             }
             atlag = suly / db;
             
-            Console.WriteLine($"6. Feladat: {atlag:N2}");
+            Console.WriteLine($"6. Feladat: {atlag:N2} font");
+        }
+
+        static void pluszegy()
+        {
+            var nevek = from b in balkez
+                        select b.Nev;
+
+            var nevlista = nevek.ToList();
+
+            var kezdobetu = from n in nevlista 
+                            orderby n
+                            group n by n[0] into tempNevek
+                            select tempNevek;
+
+            foreach (var cs in kezdobetu)
+            {
+                Console.WriteLine($"Kezdőbetű: {cs.Key}");
+                foreach (var cst in cs)
+                {
+                    Console.WriteLine($"\t{cst}");
+                }
+            }
         }
         static void Main(string[] args)
         {
@@ -78,6 +100,7 @@ namespace balkezesek
             Negyedik();
             Otodik();
             Hatodik();
+            pluszegy();
             Console.ReadKey();
         }
     }
